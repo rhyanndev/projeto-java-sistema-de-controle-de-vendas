@@ -3,14 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package br.com.projeto.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import br.com.projeto.jdbc.ConexaoBanco;
 import br.com.projeto.model.Clientes;
@@ -244,7 +243,7 @@ public class ClientesDAO {
         
         
         //Método buscar cliente por nome - retorna uma lista
-        public List<Clientes> buscaClientePorNome(String nome){
+        public List<Clientes> listaClientePorNome(String nome){
 		
 		try {
 			

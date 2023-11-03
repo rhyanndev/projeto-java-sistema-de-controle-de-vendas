@@ -603,7 +603,7 @@ public class Frmcliente extends javax.swing.JFrame {
         String nome = "%" + txtpesquisa.getText() + "%";
 
         ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscaClientePorNome(nome);
+        List<Clientes> lista = dao.listaClientePorNome(nome);
 
         DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
         //limpar os dados das linhas
@@ -640,7 +640,7 @@ public class Frmcliente extends javax.swing.JFrame {
         String nome = "%" + txtpesquisa.getText() + "%";
 
         ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscaClientePorNome(nome);
+        List<Clientes> lista = dao.listaClientePorNome(nome);
 
         DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
         //limpar os dados das linhas

@@ -6,6 +6,7 @@ package br.com.projeto.dao;
 
 import br.com.projeto.jdbc.ConexaoBanco;
 import br.com.projeto.model.Funcionarios;
+import br.com.projeto.view.FrmMenu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -248,8 +249,8 @@ public class FuncionariosDAO {
                         
             } 
             
-            catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Cliente não encontrado!");
+            catch (Exception erro) {
+                JOptionPane.showMessageDialog(null,"Cliente não encontrado!" + "Erro:" + erro);
                 
                 return null;
             }
@@ -318,6 +319,53 @@ public class FuncionariosDAO {
                 
 	}
     
+       
+        
+        
+        //Método de login do funcionário
+        
+        public void efetuaLogin(String email, String senha){
+            
+            try {
+                
+                // 1 - passo - SQL
+                
+                String sql = "select * from tb_funcionarios where email = ? and senha = ? ";
+                
+                PreparedStatement stmt = con.prepareStatement(sql);	
+			
+                stmt.setString(1, email);
+                stmt.setString(2, senha);
+                
+                ResultSet rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    //usuario logou
+                    
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema");
+                    FrmMenu tela = new FrmMenu();
+                    tela.usuarioLogado = rs.getString("nome");
+                    tela.setVisible(true);
+                    
+                }
+                else{
+                    //dados incorretos
+                    
+                    JOptionPane.showMessageDialog(null, "Dados incorretos!");
+                    
+                    
+                }
+                
+                
+                
+            } catch (SQLException erro) {
+                
+                JOptionPane.showMessageDialog(null, "Erro : " + erro);
+            }
+            
+        
+        }
+        
         
 }
 

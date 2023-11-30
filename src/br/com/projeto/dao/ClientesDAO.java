@@ -126,7 +126,6 @@ public class ClientesDAO {
 			stmt.setInt(1,obj.getId());
 			
 			
-			
 			//executar comando sql
 			stmt.execute();
 			stmt.close();

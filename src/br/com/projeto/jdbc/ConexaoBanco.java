@@ -16,7 +16,7 @@ public class ConexaoBanco {
 		
 		try {
 			
-			return DriverManager.getConnection("jdbc:mysql://127.0.0.1/bdsdcvendas","user","123");
+			return DriverManager.getConnection("jdbc:mysql://127.0.0.1/BDSDCVENDAS","user","123");
 			
 		} catch (Exception erro) {
 			throw new RuntimeException(erro);

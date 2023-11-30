@@ -146,4 +146,33 @@ public class VendasDAO {
 
     }
 
+    
+    
+    /*public void cancelarVenda(Vendas obj) {
+        try {
+                
+            // Excluir itens de venda
+        String sqlItensVendas = "DELETE FROM tb_itensvendas WHERE venda_id IN (SELECT id FROM tb_vendas WHERE cliente_id = ?)";
+        PreparedStatement stmtItensVendas = con.prepareStatement(sqlItensVendas);
+        stmtItensVendas.setInt(1, obj.getId());
+        stmtItensVendas.execute();
+        stmtItensVendas.close();
+
+        // Excluir vendas
+        String sqlVendas = "DELETE FROM tb_vendas WHERE cliente_id = ?";
+        PreparedStatement stmtVendas = con.prepareStatement(sqlVendas);
+        stmtVendas.setInt(1, obj.getId());
+        stmtVendas.execute();
+        stmtVendas.close();
+                
+            
+
+        } catch (Exception erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro : " + erro);
+
+        }
+
+    }*/
+    
 }

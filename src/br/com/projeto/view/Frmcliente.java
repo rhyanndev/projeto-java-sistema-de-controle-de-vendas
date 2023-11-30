@@ -594,6 +594,12 @@ public class Frmcliente extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // botao excluir
 
+        int op;
+        
+        op = JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja excluir esse cliente?");
+        
+        if(op == 0){
+            
         Clientes obj = new Clientes();
 
         obj.setId(Integer.parseInt(txtcodigo.getText()));
@@ -603,6 +609,8 @@ public class Frmcliente extends javax.swing.JFrame {
         dao.excluirCliente(obj);
         
         new Utilitarios().LimpaTela(painel_dados);
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 

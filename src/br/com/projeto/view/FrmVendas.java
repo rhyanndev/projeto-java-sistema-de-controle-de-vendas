@@ -1,4 +1,3 @@
-
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClientesDAO;
@@ -15,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import br.com.projeto.model.Utilitarios;
 import java.util.List;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,13 +27,22 @@ import javax.swing.table.DefaultTableModel;
  * @author Mateus
  */
 public class FrmVendas extends javax.swing.JFrame {
+    
 
+    public void setNome(String nome) {
+        txtnome.setText(nome);
+    }
+
+    public void setCpf(String cpf) {
+        txtcpf.setText(cpf);
+    }
+    
+    
     Clientes obj = new Clientes();
-    double total, preco,subtotal;
+    double total, preco, subtotal;
     int qtd;
-    
+
     DefaultTableModel carrinho;
-    
 
     public FrmVendas() {
         initComponents();
@@ -455,30 +464,39 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void btnpagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpagamentoActionPerformed
-       //botao pagamento
-       FrmPagamentos telap = new FrmPagamentos();
-       telap.txttotal.setText(String.valueOf(total));
-       
-       telap.cliente = obj;
-       telap.carrinho = carrinho;
-       
-       telap.setVisible(true);
-       this.dispose();
+        //botao pagamento
+        FrmPagamentos telap = new FrmPagamentos();
+        telap.txttotal.setText(String.valueOf(total));
+
+        telap.cliente = obj;
+        telap.carrinho = carrinho;
+
+        telap.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_btnpagamentoActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // botao cancelar venda / limpatela
-        new Utilitarios().LimpaTela(panel_dados_do_cliente);
-        new Utilitarios().LimpaTela(panel_dados_do_produto);
-        new Utilitarios().LimpaTela(panel_carrinho_de_compras);
-        
-        //Remover o produto no carrinho        
-        carrinho = (DefaultTableModel) tabelaItens.getModel();
+        int op;
+        op = JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja cancelar essa venda?");
 
-        carrinho.setRowCount(0);
-        
-        new Utilitarios().LimpaTela(panel_total_venda);
+        if (op == 0) {
+
+            new Utilitarios().LimpaTela(panel_dados_do_cliente);
+            new Utilitarios().LimpaTela(panel_dados_do_produto);
+            new Utilitarios().LimpaTela(panel_carrinho_de_compras);
+
+            //Remover o produto no carrinho        
+            carrinho = (DefaultTableModel) tabelaItens.getModel();
+
+            carrinho.setRowCount(0);
+
+            new Utilitarios().LimpaTela(panel_total_venda);
+
+            JOptionPane.showMessageDialog(null, "Venda cancelada com sucesso!");
+
+        }
 
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -510,33 +528,47 @@ public class FrmVendas extends javax.swing.JFrame {
         // botao add item
         qtd = Integer.parseInt(txtqtd.getText());
         preco = Double.parseDouble(txtpreco.getText());
-        
+
         subtotal = qtd * preco;
-        
+
         total += subtotal;
         txttotal.setText(String.valueOf(total));
-        
+
         //Adicionar o produto no carrinho        
         carrinho = (DefaultTableModel) tabelaItens.getModel();
-        
-         carrinho.addRow(new Object[]{
-             txtcodigo.getText(),
-             txtdescricao.getText(),
-             txtqtd.getText(),
-             txtpreco.getText(),
-             subtotal           
-            });
-      
+
+        carrinho.addRow(new Object[]{
+            txtcodigo.getText(),
+            txtdescricao.getText(),
+            txtqtd.getText(),
+            txtpreco.getText(),
+            subtotal
+        });
+
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaclienteActionPerformed
 
-       // Clientes obj = new Clientes();
-        ClientesDAO dao = new ClientesDAO();
+        FrmListaClientes tela = new FrmListaClientes();
+        
+        tela.setVisible(true);
+        
+        dispose();
+        
+        /**if (txtcpf.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite o CPF do cliente!");
+        } else {
+            ClientesDAO dao = new ClientesDAO();
+            obj = dao.buscaporcpf(txtcpf.getText());
 
-        obj = dao.buscaporcpf(txtcpf.getText());
+            if (obj != null) {
+                txtnome.setText(obj.getNome());
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            }
+        }*/
 
-        txtnome.setText(obj.getNome());
+
     }//GEN-LAST:event_btnbuscaclienteActionPerformed
 
     private void txtbuscaprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscaprodutoActionPerformed
@@ -557,7 +589,6 @@ public class FrmVendas extends javax.swing.JFrame {
         // busca cliente por cpf
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-        
             ClientesDAO dao = new ClientesDAO();
 
             obj = dao.buscaporcpf(txtcpf.getText());

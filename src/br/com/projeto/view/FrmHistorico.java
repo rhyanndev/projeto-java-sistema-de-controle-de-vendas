@@ -233,7 +233,8 @@ public class FrmHistorico extends javax.swing.JFrame {
     private void tabelaHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaHistoricoMouseClicked
         // Clicar em uma venda
         FrmDetalheVenda tela = new FrmDetalheVenda();
-
+        
+        tela.txtcodigo.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 0).toString());
         tela.txtcliente.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 2).toString());
         tela.txtotalvenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 3).toString());
         tela.txtdatavenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 1).toString());

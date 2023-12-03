@@ -57,6 +57,7 @@ public class FrmVendas extends javax.swing.JFrame {
     
     //instância do método construtor de frmListaClientes
     private FrmListaClientes frmListaClientes;
+    private FrmListaProdutos frmListaProdutos;
     
     
     
@@ -71,6 +72,7 @@ public class FrmVendas extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         
         frmListaClientes = new FrmListaClientes(this);
+        frmListaProdutos = new FrmListaProdutos(this);
 
     }
 
@@ -612,12 +614,8 @@ public class FrmVendas extends javax.swing.JFrame {
         txtdescricao.setText(objs.getDescricao());
         txtpreco.setText(String.valueOf(objs.getPreco())); */
         
-        FrmListaProdutos tela = new FrmListaProdutos();
-        
-        tela.setResizable(false);
-        tela.setVisible(true);
-
-        this.dispose();
+        frmListaProdutos.setResizable(false);
+        frmListaProdutos.setVisible(true);
         
         
     }//GEN-LAST:event_txtbuscaprodutoActionPerformed

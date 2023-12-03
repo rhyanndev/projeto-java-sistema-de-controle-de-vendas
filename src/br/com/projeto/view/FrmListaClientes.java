@@ -21,17 +21,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmListaClientes extends javax.swing.JFrame {
 
-    
+    //Variável de instância para armazenar a referência ao "FrmVendas"
     private FrmVendas frmVendas;
 
-    
-    // Restante do código...
-    
-    /*public void setFrmVendasReference(FrmVendas frmVendas) {
-        this.frmVendas = frmVendas;
-    }*/
-    
-    
     //Método lista tabela
     public void listar() {
 

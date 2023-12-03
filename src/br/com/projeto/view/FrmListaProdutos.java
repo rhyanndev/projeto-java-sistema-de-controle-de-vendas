@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmListaProdutos extends javax.swing.JFrame {
 
+    //Variável de instância para armazenar a referência ao "FrmVendas"
+    private FrmVendas frmVendas;
     
     //Método lista tabela
     public void listar() {
@@ -52,7 +54,8 @@ public class FrmListaProdutos extends javax.swing.JFrame {
     /**
      * Creates new form FrmListaClientes
      */
-    public FrmListaProdutos() {
+    public FrmListaProdutos(FrmVendas frmVendas) {
+        this.frmVendas = frmVendas;
         initComponents();
     }
 
@@ -263,11 +266,11 @@ public class FrmListaProdutos extends javax.swing.JFrame {
                  // Verificar se alguma linha foi selecionada
                 // Obtenha os valores da tabela
                 
-                String codigo = tabelaProdutos.getValueAt(selectedRow, 0).toString();
+                /*String codigo = tabelaProdutos.getValueAt(selectedRow, 0).toString();
                 String nome = tabelaProdutos.getValueAt(selectedRow, 1).toString();
                 String qtdproduto = tabelaProdutos.getValueAt(selectedRow, 2).toString();
                 String preco = tabelaProdutos.getValueAt(selectedRow, 4).toString();
-                /*String fornecedor = tabelaProdutos.getValueAt(selectedRow, 4).toString();*/
+                /*String fornecedor = tabelaProdutos.getValueAt(selectedRow, 4).toString();
 
                 // Crie uma instância do FrmVendas e passe os valores
                 FrmVendas tela = new FrmVendas();
@@ -279,7 +282,24 @@ public class FrmListaProdutos extends javax.swing.JFrame {
                 // Exiba o FrmVendas
                 tela.setVisible(true);
                 
-                dispose();
+                dispose();*/
+                
+                
+        String codigo = tabelaProdutos.getValueAt(selectedRow, 0).toString();
+        String nome = tabelaProdutos.getValueAt(selectedRow, 1).toString();
+        String qtdproduto = tabelaProdutos.getValueAt(selectedRow, 2).toString();
+        String preco = tabelaProdutos.getValueAt(selectedRow, 4).toString();
+
+        // Atualize os campos do FrmVendas utilizando a referência passada
+        frmVendas.setId(codigo);
+        frmVendas.setDescricao(nome);
+        frmVendas.setQtd_estoque(qtdproduto);
+        frmVendas.setPreco(preco);
+        
+        //frmVendas.setVisible(true);
+        dispose();
+                
+                
             }
         }
     });
@@ -323,7 +343,7 @@ public class FrmListaProdutos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmListaProdutos().setVisible(true);
+                
             }
         });
     }

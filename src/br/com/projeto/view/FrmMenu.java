@@ -248,9 +248,10 @@ public class FrmMenu extends javax.swing.JFrame {
     private void menu_trocadeusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_trocadeusuarioActionPerformed
         // TODO add your handling code here:
         
-        FrmLogin telalogin = new FrmLogin();
+        FrmLogin tela = new FrmLogin();
         this.dispose();
-        telalogin.setVisible(true);
+        tela.setVisible(true);
+        tela.setResizable(false);
     }//GEN-LAST:event_menu_trocadeusuarioActionPerformed
 
     private void menu_sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_sairMouseClicked
@@ -269,9 +270,10 @@ public class FrmMenu extends javax.swing.JFrame {
     private void menu_consultaprodutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultaprodutosActionPerformed
         // TODO add your handling code here:
         
-        FrmProdutos telaprodutos = new FrmProdutos();
-        telaprodutos.consulta_produtosjTabbedPane1.setSelectedIndex(1);
-        telaprodutos.setVisible(true);
+        FrmProdutos tela = new FrmProdutos();
+        tela.consulta_produtosjTabbedPane1.setSelectedIndex(1);
+        tela.setVisible(true);
+        tela.setResizable(false);
         
     }//GEN-LAST:event_menu_consultaprodutosActionPerformed
 
@@ -280,6 +282,7 @@ public class FrmMenu extends javax.swing.JFrame {
         Frmcliente tela = new Frmcliente();
         tela.cadastro_de_clientes_consultajTabbedPane1.setSelectedIndex(1);
         tela.setVisible(true);
+        tela.setResizable(false);
     }//GEN-LAST:event_menu_controle_de_clientesActionPerformed
 
     private void menu_controlefuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_controlefuncionariosActionPerformed
@@ -288,6 +291,7 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmFuncionarios tela = new FrmFuncionarios();
         tela.cadastro_funcionarios_consultajTabbedPane1.setSelectedIndex(1);
         tela.setVisible(true);
+        tela.setResizable(false);
         
     }//GEN-LAST:event_menu_controlefuncionariosActionPerformed
 
@@ -297,6 +301,7 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmFornecedores tela = new FrmFornecedores();
         tela.cadastro_de_fornecedores_consulta.setSelectedIndex(1);
         tela.setVisible(true);
+        tela.setResizable(false);
         
     }//GEN-LAST:event_menu_controlefornecedoresActionPerformed
 
@@ -305,6 +310,7 @@ public class FrmMenu extends javax.swing.JFrame {
         
         FrmEstoque tela = new FrmEstoque();
         tela.setVisible(true);
+        tela.setResizable(false);
 
     }//GEN-LAST:event_menu_controle_estoqueActionPerformed
 
@@ -313,6 +319,7 @@ public class FrmMenu extends javax.swing.JFrame {
         
         FrmVendas tela = new FrmVendas();
         tela.setVisible(true);
+        tela.setResizable(false);
     }//GEN-LAST:event_menu_abrir_pdvActionPerformed
 
     private void menu_controlevendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_controlevendasActionPerformed
@@ -320,6 +327,7 @@ public class FrmMenu extends javax.swing.JFrame {
         
         FrmHistorico tela = new FrmHistorico();
         tela.setVisible(true);
+        tela.setResizable(false);
     }//GEN-LAST:event_menu_controlevendasActionPerformed
 
     private void menu_posicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_posicaoActionPerformed
@@ -327,6 +335,7 @@ public class FrmMenu extends javax.swing.JFrame {
         
         FrmTotalVenda tela = new FrmTotalVenda();
         tela.setVisible(true);
+        tela.setResizable(false);
     }//GEN-LAST:event_menu_posicaoActionPerformed
 
     /**

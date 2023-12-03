@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmVendas extends javax.swing.JFrame {
     
-
+    //informações cliente
     public void setNome(String nome) {
         txtnome.setText(nome);
     }
@@ -36,6 +36,28 @@ public class FrmVendas extends javax.swing.JFrame {
     public void setCpf(String cpf) {
         txtcpf.setText(cpf);
     }
+    
+    
+    //informações produto
+    public void setId(String codigo) {
+        txtcodigo.setText(codigo);
+    }
+    
+    public void setDescricao(String descricao) {
+        txtdescricao.setText(descricao);
+    }
+        
+    public void setQtd_estoque(String qtdestoque) {
+        txtqtd.setText(qtdestoque);
+    }
+    
+    public void setPreco(String preco) {
+        txtpreco.setText(preco);
+    }
+    
+    //instância do método construtor de frmListaClientes
+    private FrmListaClientes frmListaClientes;
+    
     
     
     Clientes obj = new Clientes();
@@ -47,6 +69,8 @@ public class FrmVendas extends javax.swing.JFrame {
     public FrmVendas() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
+        
+        frmListaClientes = new FrmListaClientes(this);
 
     }
 
@@ -549,11 +573,19 @@ public class FrmVendas extends javax.swing.JFrame {
 
     private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaclienteActionPerformed
 
-        FrmListaClientes tela = new FrmListaClientes();
         
+            frmListaClientes.setResizable(false);
+            frmListaClientes.setVisible(true);
+        
+        
+        
+        /*FrmListaClientes tela = new FrmListaClientes();
+        
+        tela.setResizable(false);
         tela.setVisible(true);
         
         dispose();
+        */
         
         /**if (txtcpf.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite o CPF do cliente!");
@@ -572,13 +604,22 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbuscaclienteActionPerformed
 
     private void txtbuscaprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscaprodutoActionPerformed
-        Produtos objs = new Produtos();
+        /* Produtos objs = new Produtos();
         ProdutosDAO dao = new ProdutosDAO();
 
         objs = dao.buscaPorCodigo(Integer.parseInt(txtcodigo.getText()));
 
         txtdescricao.setText(objs.getDescricao());
-        txtpreco.setText(String.valueOf(objs.getPreco()));
+        txtpreco.setText(String.valueOf(objs.getPreco())); */
+        
+        FrmListaProdutos tela = new FrmListaProdutos();
+        
+        tela.setResizable(false);
+        tela.setVisible(true);
+
+        this.dispose();
+        
+        
     }//GEN-LAST:event_txtbuscaprodutoActionPerformed
 
     private void txttotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalActionPerformed

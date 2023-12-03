@@ -5,8 +5,10 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClientesDAO;
+import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.dao.VendasDAO;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Produtos;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import br.com.projeto.model.Vendas;
@@ -19,47 +21,28 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Loja
  */
-public class FrmListaClientes extends javax.swing.JFrame {
+public class FrmListaProdutos extends javax.swing.JFrame {
 
-    
-    private FrmVendas frmVendas;
-
-    
-    // Restante do código...
-    
-    /*public void setFrmVendasReference(FrmVendas frmVendas) {
-        this.frmVendas = frmVendas;
-    }*/
-    
     
     //Método lista tabela
     public void listar() {
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.listarClientes();
-        DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
+        ProdutosDAO dao = new ProdutosDAO();
+        List<Produtos> lista = dao.listarProdutos();
+        DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
 
         //limpar os dados das linhas
         dados.setNumRows(0);
 
         //para cada item da lista ele vai criar um objeto do tipo cliente chamado c
-        for (Clientes c : lista) {
+        for (Produtos c : lista) {
 
             dados.addRow(new Object[]{
                 c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf(),});
+                c.getDescricao(),
+                c.getQtd_estoque(),
+                c.getFornecedor(),
+                c.getPreco()});
         }
 
     }
@@ -69,8 +52,7 @@ public class FrmListaClientes extends javax.swing.JFrame {
     /**
      * Creates new form FrmListaClientes
      */
-    public FrmListaClientes(FrmVendas frmVendas) {
-        this.frmVendas = frmVendas;
+    public FrmListaProdutos() {
         initComponents();
     }
 
@@ -89,7 +71,7 @@ public class FrmListaClientes extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaClientes = new javax.swing.JTable();
+        tabelaProdutos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,31 +108,26 @@ public class FrmListaClientes extends javax.swing.JFrame {
             }
         });
 
-        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "RG", "CPF", "E-mail", "Telefone", "Celular", "Cep", "Endereço", "Nº", "Complemento", "Bairro", "Cidade", "UF"
+                "Código", "Nome", "Quantidade", "Fornecedor", "Preço"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, false, true, true, true, true, true, true, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaClientesMouseClicked(evt);
+                tabelaProdutosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaClientes);
+        jScrollPane1.setViewportView(tabelaProdutos);
+        if (tabelaProdutos.getColumnModel().getColumnCount() > 0) {
+            tabelaProdutos.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout painel_consultasLayout = new javax.swing.GroupLayout(painel_consultas);
         painel_consultas.setLayout(painel_consultasLayout);
@@ -181,7 +158,7 @@ public class FrmListaClientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Lista de Clientes");
+        jLabel1.setText("Lista de Produtos");
 
         javax.swing.GroupLayout painel_fundoLayout = new javax.swing.GroupLayout(painel_fundo);
         painel_fundo.setLayout(painel_fundoLayout);
@@ -231,31 +208,22 @@ public class FrmListaClientes extends javax.swing.JFrame {
     private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesquisaKeyPressed
         String nome = "%" + txtpesquisa.getText() + "%";
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.listaClientePorNome(nome);
+        ProdutosDAO dao = new ProdutosDAO();
+        List<Produtos> lista = dao.listarProdutosPorNome(nome);
 
-        DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
+        DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
         //limpar os dados das linhas
         dados.setNumRows(0);
 
         //para cada item da lista ele vai criar um objeto do tipo cliente chamado c
-        for (Clientes c : lista) {
+        for (Produtos c : lista) {
 
             dados.addRow(new Object[]{
                 c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf(),});
+                c.getDescricao(),
+                c.getQtd_estoque(),
+                c.getFornecedor(),
+                c.getPreco()});
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
 
@@ -264,74 +232,60 @@ public class FrmListaClientes extends javax.swing.JFrame {
 
         String nome = "%" + txtpesquisa.getText() + "%";
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.listaClientePorNome(nome);
+        ProdutosDAO dao = new ProdutosDAO();
+        List<Produtos> lista = dao.listarProdutosPorNome(nome);
 
-        DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
+        DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
         //limpar os dados das linhas
         dados.setNumRows(0);
 
         //para cada item da lista ele vai criar um objeto do tipo cliente chamado c
-        for (Clientes c : lista) {
+        for (Produtos c : lista) {
 
             dados.addRow(new Object[]{
                 c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf(),});
+                c.getDescricao(),
+                c.getQtd_estoque(),
+                c.getFornecedor(),
+                c.getPreco()});
         }
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+    private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutosMouseClicked
         // TODO add your handling code here:
              
-        tabelaClientes.addMouseListener(new MouseAdapter() {
+        tabelaProdutos.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            int selectedRow = tabelaClientes.getSelectedRow();
+            int selectedRow = tabelaProdutos.getSelectedRow();
             if (selectedRow != -1) { 
                  // Verificar se alguma linha foi selecionada
                 // Obtenha os valores da tabela
                 
-                /*String nome = tabelaClientes.getValueAt(selectedRow, 1).toString();
-                String cpf = tabelaClientes.getValueAt(selectedRow, 3).toString();
+                String codigo = tabelaProdutos.getValueAt(selectedRow, 0).toString();
+                String nome = tabelaProdutos.getValueAt(selectedRow, 1).toString();
+                String qtdproduto = tabelaProdutos.getValueAt(selectedRow, 2).toString();
+                String preco = tabelaProdutos.getValueAt(selectedRow, 4).toString();
+                /*String fornecedor = tabelaProdutos.getValueAt(selectedRow, 4).toString();*/
 
                 // Crie uma instância do FrmVendas e passe os valores
                 FrmVendas tela = new FrmVendas();
-                tela.setNome(nome);
-                tela.setCpf(cpf);
-
+                tela.setId(codigo);
+                tela.setDescricao(nome);
+                tela.setQtd_estoque(qtdproduto);
+                tela.setPreco(preco);
+                
                 // Exiba o FrmVendas
                 tela.setVisible(true);
                 
-                dispose();*/
-                
-        String nome = tabelaClientes.getValueAt(selectedRow, 1).toString();
-        String cpf = tabelaClientes.getValueAt(selectedRow, 3).toString();
-
-        // Atualize os campos do FrmVendas utilizando a referência passada
-        frmVendas.setNome(nome);
-        frmVendas.setCpf(cpf);
-        
-        //frmVendas.setVisible(true);
-        dispose();
+                dispose();
             }
         }
     });
         
      
-    }//GEN-LAST:event_tabelaClientesMouseClicked
+    }//GEN-LAST:event_tabelaProdutosMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
@@ -355,20 +309,21 @@ public class FrmListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new FrmListaClientes().setVisible(true);
+                new FrmListaProdutos().setVisible(true);
             }
         });
     }
@@ -380,7 +335,7 @@ public class FrmListaClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel painel_consultas;
     private javax.swing.JPanel painel_fundo;
-    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JTable tabelaProdutos;
     private javax.swing.JTextField txtpesquisa;
     // End of variables declaration//GEN-END:variables
 

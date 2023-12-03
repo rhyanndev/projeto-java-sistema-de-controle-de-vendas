@@ -18,6 +18,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        setResizable(false);
     }
 
     /**

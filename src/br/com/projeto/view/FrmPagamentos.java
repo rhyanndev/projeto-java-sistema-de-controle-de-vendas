@@ -220,8 +220,15 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
         Vendas objv = new Vendas();
 
+        JOptionPane.showMessageDialog(null,"ID CLIENTE:" + cliente.getId());
+        
+        
         //Dados do cliente (cliente_id)
         objv.setCliente(cliente);
+        
+        System.out.println("Id cliente: " + cliente.getId());
+        System.out.println("Nome cliente: " + cliente.getNome());
+        System.out.println("CPF cliente: " + cliente.getCpf());
 
         //Pega a data da venda
         Date agora = new Date();

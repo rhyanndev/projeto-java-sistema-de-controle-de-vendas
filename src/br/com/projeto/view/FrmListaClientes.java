@@ -23,6 +23,8 @@ public class FrmListaClientes extends javax.swing.JFrame {
 
     //Variável de instância para armazenar a referência ao "FrmVendas"
     private FrmVendas frmVendas;
+    
+    Clientes obj = new Clientes();
 
     //Método lista tabela
     public void listar() {
@@ -309,16 +311,18 @@ public class FrmListaClientes extends javax.swing.JFrame {
                 
                 dispose();*/
                 
+        String id = tabelaClientes.getValueAt(selectedRow, 0).toString();        
         String nome = tabelaClientes.getValueAt(selectedRow, 1).toString();
         String cpf = tabelaClientes.getValueAt(selectedRow, 3).toString();
 
         // Atualize os campos do FrmVendas utilizando a referência passada
         frmVendas.setNome(nome);
         frmVendas.setCpf(cpf);
-        
+        frmVendas.setIdCliente(id);
         //frmVendas.setVisible(true);
         dispose();
             }
+            
         }
     });
         

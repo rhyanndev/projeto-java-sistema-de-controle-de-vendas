@@ -28,7 +28,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmVendas extends javax.swing.JFrame {
     
+   
+    
     //informações cliente
+    
+    public void setIdCliente(String id) {
+        txtcodigocliente.setText(id);
+    }
+    
     public void setNome(String nome) {
         txtnome.setText(nome);
     }
@@ -97,6 +104,8 @@ public class FrmVendas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnbuscacliente = new javax.swing.JButton();
         txtcpf = new javax.swing.JFormattedTextField();
+        txtcodigocliente = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         panel_dados_do_produto = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
@@ -209,6 +218,21 @@ public class FrmVendas extends javax.swing.JFrame {
             }
         });
 
+        txtcodigocliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtcodigocliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoclienteActionPerformed(evt);
+            }
+        });
+        txtcodigocliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcodigoclienteKeyPressed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabel11.setText("Código Cliente:");
+
         javax.swing.GroupLayout panel_dados_do_clienteLayout = new javax.swing.GroupLayout(panel_dados_do_cliente);
         panel_dados_do_cliente.setLayout(panel_dados_do_clienteLayout);
         panel_dados_do_clienteLayout.setHorizontalGroup(
@@ -230,11 +254,20 @@ public class FrmVendas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtdataatual, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_dados_do_clienteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtcodigocliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panel_dados_do_clienteLayout.setVerticalGroup(
             panel_dados_do_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_dados_do_clienteLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGroup(panel_dados_do_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtcodigocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(panel_dados_do_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
@@ -318,7 +351,7 @@ public class FrmVendas extends javax.swing.JFrame {
         panel_dados_do_produtoLayout.setHorizontalGroup(
             panel_dados_do_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_dados_do_produtoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(panel_dados_do_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_dados_do_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panel_dados_do_produtoLayout.createSequentialGroup()
@@ -365,7 +398,7 @@ public class FrmVendas extends javax.swing.JFrame {
                     .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(txtqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -578,7 +611,8 @@ public class FrmVendas extends javax.swing.JFrame {
         
             frmListaClientes.setResizable(false);
             frmListaClientes.setVisible(true);
-        
+            
+     
         
         
         /*FrmListaClientes tela = new FrmListaClientes();
@@ -633,7 +667,10 @@ public class FrmVendas extends javax.swing.JFrame {
             obj = dao.buscaporcpf(txtcpf.getText());
 
             txtnome.setText(obj.getNome());
+            txtcodigocliente.setText(String.valueOf(obj.getId()));
+            
 
+            JOptionPane.showMessageDialog(null,"ID CLIENTE:" + obj.getId());
         }
 
 
@@ -652,6 +689,14 @@ public class FrmVendas extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtcodigoKeyPressed
+
+    private void txtcodigoclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoclienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoclienteActionPerformed
+
+    private void txtcodigoclienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoclienteKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoclienteKeyPressed
 
     /**
      * @param args the command line arguments
@@ -702,6 +747,7 @@ public class FrmVendas extends javax.swing.JFrame {
     private javax.swing.JButton btnpagamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -718,6 +764,7 @@ public class FrmVendas extends javax.swing.JFrame {
     private javax.swing.JTable tabelaItens;
     private javax.swing.JButton txtbuscaproduto;
     private javax.swing.JTextField txtcodigo;
+    private javax.swing.JTextField txtcodigocliente;
     private javax.swing.JFormattedTextField txtcpf;
     private javax.swing.JTextField txtdataatual;
     private javax.swing.JTextField txtdescricao;

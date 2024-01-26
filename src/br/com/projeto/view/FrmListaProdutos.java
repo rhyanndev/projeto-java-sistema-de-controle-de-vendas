@@ -299,8 +299,10 @@ public class FrmListaProdutos extends javax.swing.JFrame {
         //frmVendas.setVisible(true);
         dispose();
                 
-                
+               
             }
+            
+            
         }
     });
         

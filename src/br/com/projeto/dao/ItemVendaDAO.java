@@ -34,13 +34,13 @@ public class ItemVendaDAO {
         
            try {
 
-            String sql = "insert into tb_itensvendas (venda_id, produto_id,qtd,subtotal) values (?,?,?,?)";
+            String sql = "insert into tb_itensvendas (venda_id, produto_id, qtd, subtotal) values (?,?,?,?)";
           
             //2 passo - conectar o banco de dados e organizar o comando sql
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, obj.getVenda().getId());
-            stmt.setInt(2, obj.getProduto().getId());;
+            stmt.setInt(2, obj.getProduto().getId());
             stmt.setInt(3, obj.getQtd());
             stmt.setDouble(4, obj.getSubtotal());
 
